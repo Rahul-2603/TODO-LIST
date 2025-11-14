@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <title>Document</title>
+    <style>
+        body {
+
+            background: radial-gradient(circle at top left, #303a52 0%, #171d2b 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding-bottom: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+
+
+        .input-group {
+            height: auto;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 4px solid #00bcd4;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 50px rgba(0, 255, 255, 0.1);
+            padding: 35px;
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 60px !important;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+
+        .input-group label {
+            font-weight: 600;
+            color: #80deea;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0f7fa;
+            border-radius: 12px;
+            padding: 12px 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #00ffc4;
+            box-shadow: 0 0 10px #00bcd4;
+            outline: none;
+        }
+
+        .input-group textarea {
+            height: 70px !important;
+            resize: vertical;
+        }
+
+        .input-group>div {
+            flex-grow: 1;
+            min-width: 200px;
+            flex-basis: calc(33.33% - 20px);
+        }
+
+        .input-group>div:last-child {
+            flex-basis: calc(33.33% - 20px);
+            max-width: 450px;
+        }
+
+
+        .btn {
+            text-transform: uppercase;
+            font-weight: 700 !important;
+            border-width: 0 !important;
+            border-radius: 50px;
+            padding: 14px 30px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #add {
+            background-color: #00bcd4 !important;
+            color: #171d2b !important;
+        }
+
+        #add:hover {
+            background-color: #00e5ff !important;
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.6);
+        }
+
+        .btn-warning {
+            background-color: #00ffc4 !important;
+            color: #171d2b !important;
+        }
+
+        #remove {
+            background-color: #e91e63 !important;
+            color: white !important;
+        }
+
+
+        .dis {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid #00bcd4;
+            border-radius: 15px;
+            padding: 15px 25px !important;
+            font-size: 1.1rem !important;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+            color: #e0f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 250px;
+        }
+
+        .dis span {
+            font-size: 1.8rem;
+            font-weight: bolder;
+            color: #00ffc4;
+            margin-left: 15px;
+        }
+
+
+        #con {
+            margin-top: 40px;
+            height: 380px;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background-color: #171d2b;
+            width: 90%;
+            max-width: 1100px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            border-top: 4px solid #00bcd4;
+            border-left: 4px solid #00bcd4;
+            border-right: 4px solid #00bcd4;
+        }
+
+        #con::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cir {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00bcd4;
+            border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: hsl(240, 3%, 7%);
+            flex-shrink: 0;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cir:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px aqua;
+        }
+
+        .cir h3 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .cir h3 span {
+            font-size: 2.2rem;
+            display: block;
+            margin-top: 5px;
+            color: indigo
+        }
+
+
+        #con2 {
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background-color: #171d2b;
+            width: 90%;
+            max-width: 1100px;
+            padding: 30px 25px;
+            margin-top: 0;
+            overflow-x: auto;
+            border-bottom: 4px solid #00bcd4;
+            border-left: 4px solid #00bcd4;
+            border-right: 4px solid #00bcd4;
+        }
+
+
+        .table {
+            color: #e0f7fa;
+            margin-bottom: 0;
+        }
+
+        .table-striped>tbody>tr:nth-of-type(odd)>* {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-striped>tbody>tr:nth-of-type(even)>* {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead th {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #00bcd4;
+            border-bottom: 2px solid #00ffc4;
+            padding: 18px 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            border-color: #303a52;
+            color: wheat;
+            overflow: hidden;
+        }
+
+        .text-success.fw-bold {
+            color: #00ffc4 !important;
+            font-weight: 700 !important;
+        }
+
+        .text-danger {
+            color: #e91e63 !important;
+            font-weight: 700 !important;
+        }
+
+
+        .table .btn {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 3px;
+            border-radius: 8px;
+        }
+
+
+        @media (max-width: 992px) {
+            .input-group>div {
+                flex-basis: calc(50% - 10px);
+            }
+
+            .input-group>div:last-child {
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .d-flex.justify-content-center {
+                flex-direction: column;
+                gap: 20px;
+                margin: 20px auto !important;
+            }
+
+            #add,
+            #remove {
+                width: 85%;
+                margin: 5px auto !important;
+            }
+
+            .d-flex.justify-content-center.gap-5 {
+                flex-direction: column;
+                gap: 20px !important;
+                align-items: center;
+            }
+
+            .dis {
+                width: 90%;
+                max-width: 350px;
+            }
+
+            #con,
+            #con2 {
+                width: 95%;
+
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <section class="d-flex ">
+        <div class="input-group m-auto  mt-5 w-50 ">
+            <div class=" mx-3 my-3">
+                <label for="exampleFormControlInput1" class="form-label">TASK NO</label>
+                <input id="task_no" type="text" class="form-control" id="exampleFormControlInput1"
+                    placeholder="task no">
+            </div>
+            <div class=" ms-3 my-3">
+                <label for="exampleFormControlInput1" class="form-label">TASK NAME</label>
+                <input id="task_name" type="text" class="form-control" id="exampleFormControlInput1"
+                    placeholder="task no">
+            </div>
+            <div class="ms-3 my-3" ;>
+                <label for="exampleFormControlTextarea1 " class="form-label">DESCRIPTION</label>
+                <textarea id="dis" class="form-control" style="height: 20px;" placeholder="DESCRIPTION"
+                    id="exampleFormControlTextarea1"></textarea>
+            </div>
+        </div>
+        <div class="mt-5">
+
+            <div class="d-flex justify-content-center ">
+                <div id="add" class="btn btn-success btn-outline-dark m-5 text-light fw-bold"><i
+                        class="bi bi-plus-circle me-2"></i>ADD <span>TASK</span></div>
+                <div id="remove" class="btn btn-danger btn-outline-dark m-5  text-light fw-bolder">TASK
+                    <span>COMPLETED</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center gap-5">
+                <div class=" dis fs-5 border  rounded p-2  fw-bold">PENDING TASK:<span class="p-2" id="gc">0</span>
+                </div>
+                <div class="dis fs-5 border rounded p-2 fw-bold ">COMPLETED TASK:<span class="p-2" id="rc">0</span>
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+
+    <div id="con" class=" container d-flex  flex-wrap  overflow-x-scroll gap-4  p-4">
+
+    </div>
+
+
+    <div id="con2" class=" container d-flex  flex-nowrap  mt-0 gap-  pt-3">
+        <table class="table table-striped ">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">TASK NO</th>
+                    <th scope="col">TASK_NAME</th>
+                    <th scope="col  ">DESCRIPTION</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">EDIT</th>
+
+                </tr>
+                <tr>
+
+
+
+                </tr>
+            </thead>
+            <tbody id="tab">
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+    <script>
+        let add = document.getElementById('add')
+        let remove = document.getElementById('remove')
+        let red = document.getElementById('rc')
+        let green = document.getElementById('gc')
+        let cont = document.getElementById('con')
+        let tab = document.getElementById('tab')
+        let task_no = document.getElementById('task_no')
+        let task_name = document.getElementById('task_name')
+        let dis = document.getElementById('dis')
+
+
+        let t_disp_main = []
+        let t_dis = []
+        let ids = []
+        cont.innerHTML = ''
+        let editin = null
+
+
+
+        function table(t) {
+            tab.innerHTML = '';
+            t.forEach((ele, i) => {
+                const statusColorClass = ele.status === 'completed' ? 'text-success fw-bold' : 'text-danger ';
+
+                tab.innerHTML += ` <tr class='text-center'>
+                        <td scope="row">${ele.no}</td>
+                        <td>${ele.name}</td>
+                        <td>${ele.dis}</td>
+                        <td class="${statusColorClass}">${ele.status}</td>
+                        <td >
+                            <div  class='justify-content-center d-flex gap-3' >
+                                <div class="btn btn-success py-1 px-2"  onclick=edit(${i})> <i class="bi bi-pen me-2"></i>edit </div>
+                                <div class="btn btn-danger py-1 px-2" onclick=del(${i})> <i class="bi bi-trash me-2"></i>delete </div>
+                            </div>
+
+                        </td>
+
+                    </tr>`
+            })
+        }
+
+        function del(i) {
+            console.log(t_disp_main)
+
+            if (t_disp_main[i].status == 'pending...') {
+
+                const taskIdToDelete = t_disp_main[i].id;
+                t_dis = t_dis.filter((ele) => ele.id !== taskIdToDelete)
+                t_disp_main.splice(i, 1)
+
+                table(t_disp_main)
+                disp(t_dis)
+
+
+
+            }
+            else {
+                alert("task completed")
+            }
+            red.innerText = t_disp_main.length - t_dis.length
+            green.innerText = t_dis.length
+        }
+        function edit(i) {
+            editin = i
+
+            if (t_disp_main[i].status == 'pending...') {
+                task_name.value = t_disp_main[i].name
+                task_no.value = t_disp_main[i].no
+                dis.value = t_disp_main[i].dis
+                add.innerHTML = `<i class="bi bi-arrow-clockwise me-2">UPDATE <span>TASK</span>`
+
+            }
+            else {
+                alert('Cannot edit: This task is Completed.')
+            }
+            add.classList.add('btn-warning');
+
+
+        }
+
+
+        function disp(ele) {
+            cont.innerHTML = ''
+
+            ele.forEach((cr) => {
+                cont.innerHTML += `<div  onclick=Circle(${cr.id}) style="background-color:${cr.color_c} ;"  class="container cir  rounded-circle   mx-3">
+                        <h3 class="mx-4 mt-5   "> TASK <span class="p-3 ms-2 ">${cr.no}</span></h3></div>  `
+                green.innerText = t_dis.length
+
+            })
+        }
+
+
+        add.addEventListener('click', () => {
+
+            if (task_name.value != '' && task_no.value != '' && dis.value != '') {
+                tab.innerHTML = ''
+
+
+                if (add.innerHTML == `<i class="bi bi-plus-circle me-2"></i>ADD <span>TASK</span>`) {
+                    let id = Math.trunc(Math.random() * 100000)
+                    let t_list = {
+                        no: task_no.value,
+                        name: task_name.value,
+                        dis: dis.value,
+                        status: 'pending...',
+                        id,
+                        color_c: 'aqua'
+                    }
+
+                    t_disp_main.push(t_list)
+                    t_dis.push(t_list)
+
+                    table(t_disp_main)
+
+                    disp(t_dis)
+                }
+                else {
+                    const taskToUpdate = t_disp_main[editin];
+                    t_disp_main = t_disp_main.map((ele, pos) => {
+
+                        if (ele.id == taskToUpdate.id) {
+                            t_disp_main[editin].name = task_name.value
+                            t_disp_main[editin].no = task_no.value
+                            t_disp_main[editin].dis = dis.value
+
+                        }
+                        return ele
+                    })
+                    table(t_disp_main)
+                    add.innerHTML = '<i class="bi bi-plus-circle me-2"></i>ADD <span>TASK</span>'
+                    add.classList.remove('btn-warning');
+                    editin = null
+
+
+                }
+
+                task_name.value = ''
+                task_no.value = ''
+                dis.value = ''
+
+
+
+            } else {
+                alert('Please fill in all task fields.')
+            }
+
+        })
+
+
+        function Circle(ind) {
+
+            t_dis = t_dis.map((ele) => {
+                if (ele.id == ind) {
+                    if (ele.color_c == "aqua") {
+                        ele.color_c = "orange"
+                    } else {
+                        ele.color_c = "aqua"
+                    }
+                }
+                return ele
+            })
+            cont.innerHTML = ''
+            disp(t_dis)
+
+
+        }
+
+
+
+        remove.addEventListener('click', () => {
+
+            let completedCount = 0;
+            t_disp_main = t_disp_main.map((ele) => {
+                if (ele.color_c == "orange") {
+                    ele.status = 'completed'
+                    completedCount++;
+
+                }
+                return ele
+            })
+            if (completedCount === 0) {
+                alert('Please select a task to mark as completed by clicking its status circle.');
+                return;
+            }
+
+            t_dis = t_dis.filter((ele) => ele.color_c != "orange")
+            table(t_disp_main)
+
+
+            cont.innerHTML = ''
+            disp(t_dis)
+            red.innerText = t_disp_main.length - t_dis.length
+
+
+            green.innerText = t_dis.length
+
+
+
+
+
+
+
+
+        })
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
