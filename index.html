@@ -248,7 +248,7 @@
 
         .table td,
         .table th {
-           
+
             border-color: #303a52;
             color: wheat;
             overflow: hidden;
@@ -274,20 +274,20 @@
         }
 
         table {
-    table-layout: fixed;
-}
+            table-layout: fixed;
+        }
 
-.ov {
-    white-space: normal !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 250px;
-    
-}
+        .ov {
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            max-width: 250px;
+
+        }
 
 
 
-        
+
 
 
         @media (max-width: 992px) {
@@ -299,7 +299,8 @@
                 flex-basis: 100%;
                 max-width: 100%;
             }
-             .cou {
+
+            .cou {
                 margin: auto;
             }
         }
@@ -308,11 +309,24 @@
             .input-group {
                 flex-direction: column;
                 gap: 15px;
-               
-                
-                
+
+
+
             }
-           
+
+            @media (max-width: 768px) {
+                .input-group {
+                    flex-direction: column !important;
+                }
+
+                .input-group>div {
+                    width: 100% !important;
+                    flex-basis: 100% !important;
+                    max-width: 100% !important;
+                    margin: 0 !important;
+                }
+            }
+
 
             .d-flex.justify-content-center {
                 flex-direction: column;
@@ -399,7 +413,7 @@
     <div id="con2" class=" container   mt-0 gap-  pt-3">
         <table class="table table-striped  ">
             <thead>
-                <tr  class="text-center ">
+                <tr class="text-center ">
                     <th scope="col">TASK NO</th>
                     <th scope="col">TASK_NAME</th>
                     <th scope="col ">DESCRIPTION</th>
@@ -413,7 +427,7 @@
 
                 </tr>
             </thead>
-            <tbody id="tab" >
+            <tbody id="tab">
 
             </tbody>
         </table>
